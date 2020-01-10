@@ -9,7 +9,5 @@ public class Main {
 
         System.out.println("HI Jack!");
         System.out.println("Hi Jack");
-        System.out.println("Jack");
-
     }
 }
