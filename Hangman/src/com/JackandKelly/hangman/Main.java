@@ -7,9 +7,10 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
 
-        System.out.println("HI Jack!");
-        System.out.println("Hi Jack");
-        System.out.println("Jahck");
+        WordToArray wordToArray = new WordToArray();
+
+        wordToArray.wordToCharArray();
 
     }
 }
+
