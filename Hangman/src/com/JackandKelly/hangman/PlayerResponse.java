@@ -11,7 +11,7 @@ public class PlayerResponse {
         for(int i=0; i< wordInCharArray.length; i++){
 
             if (playerSaysLetter == wordInCharArray[i]) {
-                System.out.println(playerSaysLetter + " was correct!")
+                System.out.println(playerSaysLetter + " was correct!");
             }
             else{
                 System.out.println(playerSaysLetter + " was incorrect. You lose a life.");

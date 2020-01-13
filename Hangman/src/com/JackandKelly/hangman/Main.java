@@ -8,8 +8,12 @@ public class Main {
 	// write your code here
 
         WordToArray wordToArray = new WordToArray();
+        Welcome welcome = new Welcome();
+
+        welcome.welcomeMessage();
 
         wordToArray.wordToCharArray();
+
 
 
     }
