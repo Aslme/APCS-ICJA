@@ -7,12 +7,11 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
 
-        WordToArray wordToArray = new WordToArray();
-        Welcome welcome = new Welcome();
+        InitGame initGame = new InitGame();
+        WordList wordList = new WordList();
 
-        welcome.welcomeMessage();
-
-        wordToArray.wordToCharArray();
+        initGame.startGame();
+        System.out.println(wordList.wordToCharArraySetup(wordList.getRandomWord()));
 
 
 
