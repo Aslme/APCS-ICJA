@@ -9,5 +9,9 @@ public class Welcome {
 
     }
 
+    public void initializeGame(){
+        
+    }
+
 
 }
