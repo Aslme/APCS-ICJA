@@ -11,15 +11,15 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        String[] possibleWords = {"watch", "tap", "hi"};
+        String[] possibleWords = {"watch", "tap", "hi", "i love rebecca singer", ""};
 
         boolean weArePlaying = true;
         while (weArePlaying == true) {
             System.out.println("---------------------------------------------------------------------------\nWelcome to Hangman. This is a game where we will test your wordy skills.\nYou will have to guess the letters to a mystery word.\n---------------------------------------------------------------------------");
 
             char[] randomWordToGuess = possibleWords[random.nextInt(possibleWords.length)].toCharArray();
-            int amountOfGuesses = randomWordToGuess.length * 2;
-            hangmanGame.playerGuess = new char[amountOfGuesses/2];
+            int amountOfGuesses = randomWordToGuess.length + 7;
+            hangmanGame.playerGuess = new char[amountOfGuesses - 7];
             hangmanGame.fillArrayBlank(hangmanGame.playerGuess);
 
             boolean wordIsGuessed = false;
