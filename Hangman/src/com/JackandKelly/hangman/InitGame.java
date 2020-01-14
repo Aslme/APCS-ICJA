@@ -4,19 +4,24 @@ import java.util.Scanner;
 
 public class InitGame {
 
-    WordList wordList = new WordList();
+WordList wordList = new WordList();
+
+String word = wordList.word;
+
+
 
 
 public int health = 8;
-public char wrongAnswers[] = new char[26];
+
 public int turnNumber = 0;
+public char[] wrongAnswers = new char[20];
 
 
     public void displayWelcome(){
         System.out.println("---------------------------------------------------------------------------\nWelcome to Hangman. This is a game where we will test your wordy skills.\nYou will have to guess the letters to a mystery word and if you don't have\nwhat it takes you will be a murderer. -Joey\n---------------------------------------------------------------------------");
     }
 
-    char userWordUpdated[] = new char[wordList.word.length()];
+    char userWordUpdated[] = new char[20];
 
     public char[] displayWordInBlanks(char[] characterArray){
 
@@ -34,9 +39,11 @@ public int turnNumber = 0;
 
 
     public void startGame() {
+        wordList.getRandomWord();
         displayWelcome();
         System.out.println("\n\n");
-        wordList.getRandomWord();
+
+
 
     }
 
@@ -63,15 +70,16 @@ public int turnNumber = 0;
     public void checkAnswer(char charEntered, char[] wordInCharArray){
         for(int i = 0; i<wordInCharArray.length; i++){
             if(charEntered == wordInCharArray[i]){
-                System.out.println("ITS A MATCH");
                 userWordUpdated[i] = charEntered;
             }
-            else{
-                System.out.println("NO LUCK");
-            }
+
 
         }
         turnNumber++;
+    }
+
+    public void gameResponse(){
+
     }
 
 }

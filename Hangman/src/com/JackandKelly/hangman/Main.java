@@ -7,9 +7,8 @@ public class Main {
 	// write your code here
 
 
-        WordList wordList = new WordList();
         InitGame initGame = new InitGame();
-
+        WordList wordList = new WordList();
 
 
         initGame.startGame();
