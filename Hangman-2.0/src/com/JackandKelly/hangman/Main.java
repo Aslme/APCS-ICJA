@@ -4,8 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    private char[] playerGuess;
 
     public static void main(String[] args) {
+        Main hangmanGame = new Main();
 
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
@@ -17,37 +19,38 @@ public class Main {
 
             char[] randomWordToGuess = possibleWords[random.nextInt(possibleWords.length)].toCharArray();
             int amountOfGuesses = randomWordToGuess.length * 2;
-            char[] playerGuess = new char[amountOfGuesses/2];
-
-            for(int i = 0; i < playerGuess.length; i++){
-                playerGuess[i] = '_';
-            }
+            hangmanGame.playerGuess = new char[amountOfGuesses/2];
+            hangmanGame.fillArrayBlank(hangmanGame.playerGuess);
 
             boolean wordIsGuessed = false;
             int tries = 0;
-            while(!wordIsGuessed && tries != amountOfGuesses) {
+            while(!wordIsGuessed && tries < amountOfGuesses) {
                 System.out.print("Current guesses: ");
-                printArray(playerGuess);
+                hangmanGame.printArray(hangmanGame.playerGuess);
                 System.out.printf("You have %d lives left.\n", amountOfGuesses - tries);
                 System.out.println("Enter a character... (lowercase)");
                 char playerInput = scanner.nextLine().charAt(0);
-                tries++;
-                System.out.println();
+
+                if (!hangmanGame.guessWasCorrect(playerInput, randomWordToGuess, hangmanGame.playerGuess)) {
+                    tries++;
+                }
 
                 if (playerInput=='-'){
                     weArePlaying = false;
                     wordIsGuessed = true;
                 } else {
                     for (int i = 0; i < randomWordToGuess.length; i++) {
-                        if(randomWordToGuess[i]==playerInput){
-                            playerGuess[i] = playerInput;
+                        if(playerInput==randomWordToGuess[i]){
+                            hangmanGame.playerGuess[i] = playerInput;
+                            System.out.println("You are correct.");
 
                         }
                     }
 
-                    if(ifTheWordGuessed(playerGuess)) {
+                    if(hangmanGame.ifTheWordGuessed(hangmanGame.playerGuess)) {
                         wordIsGuessed = true;
                         System.out.println("You Win!");
+
                     }
                 }
 
@@ -61,9 +64,9 @@ public class Main {
             }
             System.out.println("Do you want to play another game? (yes/no)");
             String anotherGame = scanner.nextLine();
-            if(anotherGame=="yes"){
+            if(anotherGame.equals("yes")){
                 weArePlaying = true;
-            }else if(anotherGame=="no"){
+            }else if(anotherGame.equals("no")){
                 weArePlaying = false;
             }
 
@@ -75,11 +78,18 @@ public class Main {
         // write your code here
     }
 
-
-    private static void printArray(char[] array) {
+    private void fillArrayBlank(char[] array) {
 
         for(int i = 0; i < array.length; i++){
             array[i] = '_';
+        }
+
+
+    }
+
+    private void printArray(char[] array) {
+
+        for(int i = 0; i < array.length; i++){
             System.out.print(array[i] + " ");
         }
 
@@ -87,14 +97,27 @@ public class Main {
 
     }
 
-    private static boolean ifTheWordGuessed(char[] playerGuess) {
+    private boolean ifTheWordGuessed(char[] playerGuess) {
         for (int i = 0; i < playerGuess.length; i++) {
-            if (playerGuess[i]!='_') {
-                return true;
+            if (playerGuess[i]=='_') {
+                return false;
             }
         }
-        return false;
+        return true;
     }
+
+    private boolean guessWasCorrect(char playerInput, char[] randomWordArray, char[] playerGuess){
+        boolean result = false;
+        for (int i = 0; i < randomWordArray.length; i++) {
+             if(playerInput == randomWordArray[i]){
+                 result = true;
+                 playerGuess[i] = playerInput;
+             }
+        }
+        return result;
+
+    }
+
 
 
 }
