@@ -4,6 +4,7 @@ public class WordList {
 
     // instance variables - replace the example below with your own
     private String[] words;
+    public String word;
 
     public WordList() {
 // initialise instance variables
@@ -13,11 +14,14 @@ public class WordList {
 
     public String getRandomWord() {
         int wordIndex = (int) (words.length * Math.random());
-        return words[wordIndex];
+        word = words[wordIndex];
+        return word;
     }
 
-    public char[] wordToCharArraySetup(String word){
-        return word.toCharArray();
+    public char[] wordToCharArray(String word){
+        char[] wordCharArray = word.toCharArray();
+        return wordCharArray;
     }
+
 
 }
