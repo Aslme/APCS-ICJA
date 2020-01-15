@@ -13,7 +13,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        String[] possibleWords = {"watch", "tap", "hi"};
+        String[] possibleWords = {"juice", "hello", "test"};
 
         boolean weArePlaying = true;
         while (weArePlaying == true) {
@@ -40,6 +40,17 @@ public class Main {
 
                 if (!hangmanGame.guessWasCorrect(playerInput, randomWordToGuess, hangmanGame.playerGuess)) {
                     tries++;
+                    for (int j = 0; j < guessedLetters.size(); j++) {
+                        if(playerInput == guessedLetters.get(j)) {
+                            inGuessedLetters = true;
+                        }
+
+                    }
+
+                    if(!inGuessedLetters) {
+                        guessedLetters.add(playerInput);
+                    }
+
                 }
 
                 if (playerInput=='-'){
@@ -53,24 +64,26 @@ public class Main {
                         if(playerInput==randomWordToGuess[i]){
                             hangmanGame.playerGuess[i] = playerInput;
 
+                            for (int j = 0; j < guessedLetters.size(); j++) {
+                                if(playerInput == guessedLetters.get(j)) {
+                                    inGuessedLetters = true;
+                                }
+
+                            }
+
+                            if(!inGuessedLetters) {
+                                guessedLetters.add(playerInput);
+                            }
 
 
-                            System.out.println(guessedLetters);
+
                             System.out.println("You are correct.");
 
                         }
-                    }
-
-                    for (int j = 0; j < guessedLetters.size(); j++) {
-                        if(playerInput == guessedLetters.get(j)) {
-                            inGuessedLetters = true;
-                        }
 
                     }
 
-                    if(!inGuessedLetters) {
-                        guessedLetters.add(playerInput);
-                    }
+
 
                     if(hangmanGame.ifTheWordGuessed(hangmanGame.playerGuess)) {
                         wordIsGuessed = true;
@@ -78,6 +91,8 @@ public class Main {
 
                     }
                 }
+
+                System.out.println("You have guessed: " + guessedLetters);
 
 
 
