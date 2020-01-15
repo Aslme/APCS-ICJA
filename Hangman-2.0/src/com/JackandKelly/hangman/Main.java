@@ -1,5 +1,7 @@
 package com.JackandKelly.hangman;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,7 +13,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        String[] possibleWords = {"watch", "tap", "hi", "i love rebecca singer", ""};
+        String[] possibleWords = {"watch", "tap", "hi"};
 
         boolean weArePlaying = true;
         while (weArePlaying == true) {
@@ -30,6 +32,9 @@ public class Main {
                 System.out.printf("You have %d lives left.\n", amountOfGuesses - tries);
                 System.out.println("Enter a character... (lowercase)");
                 char playerInput = scanner.nextLine().charAt(0);
+                String playerInputInString = String.valueOf(playerInput).toLowerCase();
+                playerInput = playerInputInString.charAt(0);
+                ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
                 if (!hangmanGame.guessWasCorrect(playerInput, randomWordToGuess, hangmanGame.playerGuess)) {
                     tries++;
@@ -39,9 +44,13 @@ public class Main {
                     weArePlaying = false;
                     wordIsGuessed = true;
                 } else {
+
+
+
                     for (int i = 0; i < randomWordToGuess.length; i++) {
                         if(playerInput==randomWordToGuess[i]){
                             hangmanGame.playerGuess[i] = playerInput;
+                            guessedLetters.add(playerInput);
                             System.out.println("You are correct.");
 
                         }
