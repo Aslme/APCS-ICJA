@@ -23,9 +23,11 @@ public class Main {
             int amountOfGuesses = randomWordToGuess.length + 7;
             hangmanGame.playerGuess = new char[amountOfGuesses - 7];
             hangmanGame.fillArrayBlank(hangmanGame.playerGuess);
+            ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
             boolean wordIsGuessed = false;
             int tries = 0;
+            boolean inGuessedLetters = false;
             while(!wordIsGuessed && tries < amountOfGuesses) {
                 System.out.print("Current guesses: ");
                 hangmanGame.printArray(hangmanGame.playerGuess);
@@ -34,7 +36,7 @@ public class Main {
                 char playerInput = scanner.nextLine().charAt(0);
                 String playerInputInString = String.valueOf(playerInput).toLowerCase();
                 playerInput = playerInputInString.charAt(0);
-                ArrayList<Character> guessedLetters = new ArrayList<Character>();
+
 
                 if (!hangmanGame.guessWasCorrect(playerInput, randomWordToGuess, hangmanGame.playerGuess)) {
                     tries++;
@@ -50,10 +52,24 @@ public class Main {
                     for (int i = 0; i < randomWordToGuess.length; i++) {
                         if(playerInput==randomWordToGuess[i]){
                             hangmanGame.playerGuess[i] = playerInput;
-                            guessedLetters.add(playerInput);
+
+
+
+                            System.out.println(guessedLetters);
                             System.out.println("You are correct.");
 
                         }
+                    }
+
+                    for (int j = 0; j < guessedLetters.size(); j++) {
+                        if(playerInput == guessedLetters.get(j)) {
+                            inGuessedLetters = true;
+                        }
+
+                    }
+
+                    if(!inGuessedLetters) {
+                        guessedLetters.add(playerInput);
                     }
 
                     if(hangmanGame.ifTheWordGuessed(hangmanGame.playerGuess)) {
