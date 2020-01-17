@@ -8,15 +8,23 @@ import java.util.Scanner;
 public class Main {
     private char[] playerGuess;
 
+    private static String charArrayToString(char[] chars){
+        String result = "";
+        for (char c: chars){
+            result += c;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Main hangmanGame = new Main();
 
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        String[] possibleWords = {"juice", "hello", "test"};
+        String[] possibleWords = {"abrasive", "abstinence", "abstinence", "accentuate", "accolade", "acme",  "adage", "adept", "adherent", "adjunct", "admonish", "adulterate", "advocate", "affinity", "affluence", "aggregate", "aversion", "banter", "barrage", "belittle", "bequeath", "bereaved", "besiege", "bigotry", "blight", "bolster", "boon", "buttress", "cadence", "caliber", "callous", "captivate", "caricature", "catalyst", "centenary", "chronic", "circumvent", "clique", "cognitive",  "deadlock", "decadent", "decimate", "definitive", "defunct", "deluge", "demarcation", "demented", "demise", "demographic", "deplete", "derogatory", "destitute", "detrimental", "devoid", "dilapidated", "directive", "disarray", "disdain", "disillusion", "disincentive", "disinterested",  "embankment", "embodiment", "emigrate", "empathy", "emulate", "ensue", "enthrall", "epitaph", "epitome", "errant",  "fissure", "flagrant", "flamboyant", "fleeting", "forage", "forlorn", "formidable", "frugal", "gaunt", "genteel", "gradient"};
 
         boolean weArePlaying = true;
-        while (weArePlaying == true) {
+        while (weArePlaying) {
             System.out.println("---------------------------------------------------------------------------\nWelcome to Hangman. This is a game where we will test your wordy skills.\nYou will have to guess the letters to a mystery word.\n---------------------------------------------------------------------------");
 
             char[] randomWordToGuess = possibleWords[random.nextInt(possibleWords.length)].toCharArray();
@@ -27,9 +35,10 @@ public class Main {
 
             boolean wordIsGuessed = false;
             int tries = 0;
-            boolean inGuessedLetters = false;
+
             while(!wordIsGuessed && tries < amountOfGuesses) {
                 System.out.print("Current guesses: ");
+                boolean inGuessedLetters = false;
                 hangmanGame.printArray(hangmanGame.playerGuess);
                 System.out.printf("You have %d lives left.\n", amountOfGuesses - tries);
                 System.out.println("Enter a character... (lowercase)");
@@ -39,7 +48,7 @@ public class Main {
 
 
                 if (!hangmanGame.guessWasCorrect(playerInput, randomWordToGuess, hangmanGame.playerGuess)) {
-                    tries++;
+
                     for (int j = 0; j < guessedLetters.size(); j++) {
                         if(playerInput == guessedLetters.get(j)) {
                             inGuessedLetters = true;
@@ -49,6 +58,7 @@ public class Main {
 
                     if(!inGuessedLetters) {
                         guessedLetters.add(playerInput);
+                        tries++;
                     }
 
                 }
@@ -92,7 +102,9 @@ public class Main {
                     }
                 }
 
-                System.out.println("You have guessed: " + guessedLetters);
+                if(!wordIsGuessed){
+                    System.out.println("You have guessed: " + guessedLetters);
+                }
 
 
 
@@ -101,6 +113,7 @@ public class Main {
 
             if (!wordIsGuessed){
                 System.out.println("You ran out of guesses");
+                System.out.println("The word was " + charArrayToString(randomWordToGuess)+".");
             }
             System.out.println("Do you want to play another game? (yes/no)");
             String anotherGame = scanner.nextLine();
